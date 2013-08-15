@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'date'
+require 'fileutils'
 require 'trollop'
 require 'yaml'
 
-$DEFAULT_FILE = File.expand_path("~/.log")
+$DEFAULT_FILE = File.expand_path("~/.log/data")
 
 $OPTIONALS = [[:author, "Author", :type => String],
               [:place, "Place", :type => String],
@@ -16,6 +17,7 @@ class Log
     @entries = if File.exists? @filename
                  YAML.load_file( @filename ).map { |h| LogEntry[h] }
                else
+                 FileUtils.mkdir_p(File.dirname($DEFAULT_FILE))
                  Array.new
                end
   end
@@ -89,7 +91,7 @@ def main
     l.add_entry(entry)
     l.save
   else
-    puts opts.usage
+    Trollop.die('No action or message')
   end
 end
 
