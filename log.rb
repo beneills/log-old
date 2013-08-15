@@ -7,6 +7,7 @@ require 'yaml'
 $DEFAULT_FILE = File.expand_path("~/.log")
 
 $OPTIONALS = [[:author, "Author", :type => String],
+              [:place, "Place", :type => String],
               [:tags, "Tags (comma-separated)", :type => String]]
 
 class Log
