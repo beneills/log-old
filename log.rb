@@ -91,7 +91,8 @@ def main
     l.add_entry(entry)
     l.save
   else
-    Trollop.die('No action or message')
+    l.list
+    #Trollop.die('No action or message')
   end
 end
 
